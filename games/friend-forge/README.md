@@ -1,41 +1,76 @@
-# Game component starter
+# Friend Forge v0.3.2 — SDK Island Port
 
-SDK version **v0.1.2**. This component is a small playable garden with a pack
-dispenser and an opening station. It has no application routes, navigation,
-wallet connection code or identity gate. The SDK runtime supplies those game
-infrastructure capabilities and the selected, verified owned Friend.
+This checkpoint moves the real Friend Forge island into the FriendSDK game sandbox.
 
-Use the SDK's local game command from your current project to run this component.
-For an existing project, mount the SDK runtime in its existing game slot and
-provide this component and `game.json`. Other project setups and layouts are
-welcome; retain the runtime's real ownership checks and sandbox boundary.
-See the package README for the exact installation and runtime command.
+## Included
 
-Move with WASD, arrow keys, or a tap/click destination. Walk to the dispenser,
-press E or tap its prompt, and buy a simulated pack. Walk to the crate to open
-it. Keep the revealed collectible or redeem it through the inventory menu.
-Settings include mute and reduced motion; failed artwork loads can be retried.
+- current Friend Forge island and bridge;
+- Ore Mine, Central Forge, Collection, Reforge and Community Furnace;
+- all current decorative trees and flowers;
+- WASD / arrows;
+- tap/click-to-walk;
+- building-label auto-navigation using the existing A* pathfinder;
+- building colliders;
+- dynamic building/Friend depth sorting;
+- tree/Friend depth sorting;
+- responsive building menus;
+- current demo Ore → Forge → Collection loop;
+- selected Friend ID displayed in the HUD;
+- FriendSDK `paused` support.
 
-| Rule | Exact value |
-| --- | --- |
-| Pack price | 1 RF (`1000000000000000000` base units) |
-| Garden pebble | 60% / 6,000 basis points; 0.5 RF |
-| Pressed flower | 30% / 3,000 basis points; 1 RF |
-| Crystal | 10% / 1,000 basis points; 3 RF |
-| Expected reward | 0.9 RF per pack |
-| Consumable | One pack produces exactly one collectible |
-| Backing | Each purchased or pending pack reserves 3 RF; kept rewards reserve their fixed RF value |
-| Redemption | Fixed value, no expiry; paid to the selected Friend's canonical wallet in a future approved real integration |
+## SDK bridge
 
-All balances, purchases, openings, collectibles and redemptions are simulated.
-An owned hardwired Generations NFT is still required. The component only calls
-the SDK's fixed preview client. It does not deploy contracts or send transactions.
-No trading, creator fees or wearable NFTs are implemented.
+`index.tsx` is intentionally thin:
 
-The source uses public SDK modules only. This example uses `GameWorld` to render
-the bundled garden props and the selected Friend's live sprites, with collision,
-depth sorting and keyboard/touch movement. `GameWorld`, these assets, the camera
-and the garden's visual style are optional starting points. Build your own
-setting, assets, character art, renderer and menus, with controls suited to your
-genre. Custom artwork does not replace the runtime's NFT ownership checks. Use
-the supported action client for economy actions and keep the game accessible.
+1. receives `friendId`, `client`, and `paused`;
+2. performs the required initial `client.read()`;
+3. verifies the snapshot belongs to the selected Friend;
+4. mounts the existing Friend Forge renderer;
+5. passes `friendId` and a live `paused` accessor into the game engine.
+
+When FriendSDK pauses the game, movement, pointer input, auto-navigation, and menu interactions are blocked.
+
+## Scope of v0.3.2
+
+Still intentionally **not integrated**:
+
+- canonical Rare Friend NFT sprite rendering;
+- SDK `buy()` for Ore;
+- SDK `play()` / `settle()` for Forge randomness;
+- SDK inventory as the Collection source of truth;
+- live/on-chain economy.
+
+The current demo economy is in-memory only. Browser `localStorage` was removed because the FriendSDK sandbox does not expose durable browser storage.
+
+## Run
+
+From the repository root:
+
+```bash
+npx friendsdk check ./games/friend-forge
+npx friendsdk build ./games/friend-forge
+npx friendsdk dev ./games/friend-forge --host 0.0.0.0 --port 4173
+```
+
+In Codespaces, keep port 4173 Public.
+
+## Next checkpoints
+
+- v0.3.3 — canonical selected Rare Friend sprite
+- v0.3.4 — SDK Ore purchase + play/settle Forge + SDK inventory
+- v0.3.5 — deploy `.friendsdk/` to GitHub Pages
+
+## v0.3.2.2 — IIFE-safe inline assets
+
+The FriendSDK game bundle is currently compiled as IIFE. The previous
+`new URL(..., import.meta.url)` asset approach is therefore not compatible
+with this build target.
+
+This version embeds the scene PNG files directly in `GameMarkup.ts` as
+`data:image/png;base64,...` URLs.
+
+This removes runtime asset-path resolution from the checkpoint and makes the
+same build usable in FriendSDK dev preview, generated `.friendsdk/`,
+Codespaces, and GitHub Pages.
+
+The original PNG files remain under `assets/` as source files.

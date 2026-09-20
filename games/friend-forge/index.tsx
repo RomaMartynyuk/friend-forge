@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import type { GameComponentProps } from "@rarefriends/friendsdk/runtime";
+import { mountFriendForge, type FriendForgeController } from "./game/FriendForgeGame";
 import "./style.css";
 
 export default function FriendForge({
@@ -7,85 +10,96 @@ export default function FriendForge({
   client,
   paused,
 }: GameComponentProps) {
+  const mountRef = useRef<HTMLDivElement | null>(null);
+  const controllerRef = useRef<FriendForgeController | null>(null);
+  const pausedRef = useRef(paused);
+
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<"preview" | "chain" | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState("");
+
+  pausedRef.current = paused;
 
   useEffect(() => {
     let active = true;
 
-    async function boot() {
-      try {
-        const snapshot = await client.read();
+    setReady(false);
+    setError("");
 
+    void client
+      .read()
+      .then((snapshot) => {
         if (!active) return;
+        if (snapshot.friendId !== friendId) {
+          throw new Error("FriendSDK session does not match the selected Friend.");
+        }
 
         setMode(snapshot.mode);
+
+        if (!mountRef.current) return;
+
+        controllerRef.current?.destroy();
+        controllerRef.current = mountFriendForge(mountRef.current, {
+          friendId,
+          getPaused: () => pausedRef.current,
+        });
+
         setReady(true);
-      } catch (err) {
+      })
+      .catch((cause) => {
         if (!active) return;
-
         setError(
-          err instanceof Error
-            ? err.message
-            : "Failed to initialize FriendSDK session"
+          cause instanceof Error
+            ? cause.message
+            : "Could not initialize Friend Forge."
         );
-      }
-    }
-
-    void boot();
+      });
 
     return () => {
       active = false;
+      controllerRef.current?.destroy();
+      controllerRef.current = null;
     };
-  }, [client]);
-
-  if (error) {
-    return (
-      <main className="sdk-check">
-        <h1>FRIEND FORGE</h1>
-        <p className="error">SDK ERROR</p>
-        <pre>{error}</pre>
-      </main>
-    );
-  }
-
-  if (!ready) {
-    return (
-      <main className="sdk-check">
-        <h1>FRIEND FORGE</h1>
-        <p>Loading Friend...</p>
-      </main>
-    );
-  }
+  }, [client, friendId]);
 
   return (
-    <main className="sdk-check">
-      <div className="sdk-card">
-        <div className="kicker">FRIEND FORGE · v0.3.1</div>
-
-        <h1>SDK CONNECTED</h1>
-
-        <div className="sdk-row">
-          <span>FRIEND ID</span>
-          <strong>#{friendId.toString()}</strong>
+    <section
+      className="friend-forge-sdk-shell"
+      aria-label="Friend Forge"
+      aria-busy={!ready}
+    >
+      {!ready && !error && (
+        <div className="sdk-boot-state" role="status">
+          Loading Friend Forge…
         </div>
+      )}
 
-        <div className="sdk-row">
-          <span>MODE</span>
-          <strong>{mode?.toUpperCase()}</strong>
+      {error && (
+        <div className="sdk-boot-state sdk-error" role="alert">
+          <strong>FRIEND FORGE SDK ERROR</strong>
+          <span>{error}</span>
         </div>
+      )}
 
-        <div className="sdk-row">
-          <span>GAME INPUT</span>
-          <strong>{paused ? "PAUSED" : "ACTIVE"}</strong>
+      <div
+        ref={mountRef}
+        className="friend-forge-mount"
+        aria-hidden={!ready || undefined}
+      />
+
+      {ready && (
+        <div className="sdk-mode-badge">
+          {mode === "chain" ? "CHAIN" : "SIMULATED PREVIEW"} · FRIEND #
+          {friendId.toString()}
         </div>
+      )}
 
-        <p className="note">
-          Next: mount the Friend Forge island and replace the temporary
-          character with the selected Rare Friend.
-        </p>
-      </div>
-    </main>
+      {paused && ready && (
+        <div className="sdk-paused-overlay" role="status">
+          <strong>SDK PAUSED</strong>
+          <span>Close the FriendSDK menu to resume the island.</span>
+        </div>
+      )}
+    </section>
   );
 }
