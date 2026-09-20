@@ -1,10 +1,67 @@
 {
-  "name": "Garden Packs",
-  "consumable": "Pack",
+  "name": "Friend Forge",
+  "consumable": "Ore",
   "price": "1000000000000000000",
   "outcomes": [
-    { "name": "Garden pebble", "chanceBps": 6000, "reward": "500000000000000000" },
-    { "name": "Pressed flower", "chanceBps": 3000, "reward": "1000000000000000000" },
-    { "name": "Crystal", "chanceBps": 1000, "reward": "3000000000000000000" }
+    {
+      "name": "Rusty Spoon",
+      "chanceBps": 1667,
+      "reward": "0"
+    },
+    {
+      "name": "Bent Dagger",
+      "chanceBps": 1667,
+      "reward": "0"
+    },
+    {
+      "name": "Old Pickaxe",
+      "chanceBps": 1666,
+      "reward": "0"
+    },
+    {
+      "name": "Knight Sword",
+      "chanceBps": 1350,
+      "reward": "50000000000000000"
+    },
+    {
+      "name": "Friend Shield",
+      "chanceBps": 1350,
+      "reward": "50000000000000000"
+    },
+    {
+      "name": "Crystal Blade",
+      "chanceBps": 700,
+      "reward": "100000000000000000"
+    },
+    {
+      "name": "Moon Hammer",
+      "chanceBps": 700,
+      "reward": "100000000000000000"
+    },
+    {
+      "name": "Neon Katana",
+      "chanceBps": 300,
+      "reward": "250000000000000000"
+    },
+    {
+      "name": "Arcane Staff",
+      "chanceBps": 300,
+      "reward": "250000000000000000"
+    },
+    {
+      "name": "Golden Friend Hammer",
+      "chanceBps": 125,
+      "reward": "500000000000000000"
+    },
+    {
+      "name": "Celestial Blade",
+      "chanceBps": 125,
+      "reward": "500000000000000000"
+    },
+    {
+      "name": "The First Hammer",
+      "chanceBps": 50,
+      "reward": "2000000000000000000"
+    }
   ]
 }
