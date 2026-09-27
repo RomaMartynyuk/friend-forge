@@ -1,57 +1,78 @@
 # Friend Forge
 
-**Builder / contact:** [@RomaMartynyuk](https://github.com/RomaMartynyuk).
+Explore a small isometric island as your own Rare Friend. Buy Iron Ore, reveal SDK-settled artifacts at the Central Forge, and complete a twelve-item Collection.
 
-**Category:** Character Spotlight.
+- **Builder / contact:** [@RomaMartynyuk](https://github.com/RomaMartynyuk)
+- **Category:** Character Spotlight
+- **Source:** [Friend Forge on GitHub — `sdk-integration`](https://github.com/RomaMartynyuk/friend-forge/tree/sdk-integration)
+- **Playable preview:** [Play Friend Forge](https://romamartynyuk.github.io/friend-forge/)
+- **Stack:** FriendSDK v0.1.2, TypeScript/React, HTML/CSS/canvas
 
-**One sentence:** Explore an isometric island with your own Rare Friend, buy
-Iron Ore with simulated RF, forge SDK-settled artifacts and fill a twelve-item
-Collection.
+## What did you build?
 
-**Source:** [RomaMartynyuk/friend-forge (`sdk-integration`)](https://github.com/RomaMartynyuk/friend-forge/tree/sdk-integration) — code, assets,
-economy explanation, credits and setup instructions.
+The selected Generations NFT is the character you control—not just an avatar in a profile card. Walk the island with keyboard or touch controls, use building labels to auto-walk around colliders, and meet the Ore Mine, Central Forge, Collection, Reforge and Community Furnace. The twelve artifacts have distinct artwork and rarity. A Forge play ends in a game-styled rarity roll, silhouette and full-artwork reveal; the client never chooses the result.
 
-**Playable preview:** [Friend Forge on GitHub Pages](https://romamartynyuk.github.io/friend-forge/).
-The public FriendSDK loader and assets were checked; full gameplay requires an
-eligible browser wallet and has not yet been verified in this release QA.
+The Friend's canonical character artwork and SDK sound cues remain intact. The SDK selects an owned hardwired Friend and keeps its simulated RF, Ore and artifacts with that Friend's canonical wallet. That playable, wallet-linked character is why **Character Spotlight** is the best fit.
 
-**Requirements:** A browser wallet on Robinhood mainnet holding a hardwired
-Generations NFT of generation 1 or higher. Preview RF, Ore and results are
-simulated; no real RF funding or transaction signature is needed to play.
+## Playable demo and local run
 
-**Stack:** FriendSDK v0.1.2, TypeScript/React, HTML/CSS/canvas, canonical
-Friend sprites and sounds. Local run: `npx friendsdk check
-./games/friend-forge`, `npx friendsdk build ./games/friend-forge`, then
-`npx friendsdk dev ./games/friend-forge --host 0.0.0.0 --port 4173`.
+Open [the public preview](https://romamartynyuk.github.io/friend-forge/) in a browser with a wallet on **Robinhood mainnet** holding a hardwired Rare Friends Generations NFT (generation 1 or higher). The preview economy is simulated: no real RF funding or transaction signature is required. The builder reports that the public preview works; the automated browser tests use a mock wallet.
 
-**How to play:** Select your Friend. Move with WASD/arrows or tap the island;
-click/tap building labels to auto-walk. At Ore Mine, buy Iron Ore for 1 RF
-each. At Central Forge, spend one Ore per ordinary SDK play. The cinematic
-reveals the SDK-settled artifact; Collection tracks twelve items and
-duplicates. Mining Dig has free practice or a 2 RF expedition that buys two
-ordinary Iron Ore; dig score is cosmetic. Reforge is a salvage loop (sell a
-redeemable duplicate, buy one Iron, forge with unchanged odds). Community
-Furnace has three local mini-games with no economy rewards. MIX controls
-volume/mute/ambience.
+To run from source with Node.js 22+:
 
-**Odds and RF rewards:** Common 50% → 0 RF; Uncommon 27% → 0.05 RF; Rare
-14% → 0.10 RF; Epic 6% → 0.25 RF; Legendary 2.5% → 0.50 RF; Mythic 0.5%
-→ 2 RF. Expected redemption 0.065 RF per Forge, maximum 2 RF. Gold and
-Diamond are locked previews. Zero-reward artifacts are collectibles and
-cannot be redeemed. See the source repository's `ECONOMY.md` for exact
-outcome weights and caveats.
+```bash
+git clone --branch sdk-integration https://github.com/RomaMartynyuk/friend-forge.git
+cd friend-forge
+npm ci
+npm test
+npm run check:game
+npm run build:game
+npx friendsdk dev ./games/friend-forge --host 0.0.0.0 --port 4173
+```
 
-**Checks:** FriendSDK check/build; 10 unit tests; official mock-wallet
-browser checks at 960/360 px; focused island/Ore Mine/Forge checks at desktop
-and mobile. The public host loads the SDK wallet gate and main assets; an
-eligible-wallet end-to-end playthrough remains outstanding.
+## How do you play?
 
-**Known limitations:** Simulated progress lasts for the SDK preview session.
-No live RF transfer, Gold/Diamond Forge tier, global Furnace state, or
-atomic Reforge action. Mining score never awards extra Ore. The island is
-visually dense at 360 px; touch labels require a real-device review.
+1. Select your Friend. Move with WASD, arrow keys, or a tap/click on the island. Tap a building label to auto-walk there.
+2. At **Ore Mine**, buy Iron Ore for 1 simulated RF each. Mining Dig offers free practice or a 2 RF expedition that buys exactly two ordinary Iron Ore; dig score does not grant bonus Ore.
+3. At **Central Forge**, spend one Iron Ore for one FriendSDK play. The SDK commits and settles the artifact; the cinematic only presents it.
+4. Open **Collection** to inspect discovered and undiscovered items, duplicates, rarity, artwork and redeemable value. A positive-value duplicate may be redeemed through the SDK.
+5. **Reforge** is a salvage loop: redeem one eligible surplus copy, buy Iron Ore, then make an ordinary Forge play. Dice, Lots and Cases change the presentation, not the odds or outcome. **Community Furnace** has three local mini-games with no RF or item rewards.
 
-**Credits:** Canonical Friend identity and sound cues come from FriendSDK.
-The twelve artifact assets derive from the project owner's approved artwork
-sheet; provenance is documented in `assets/artifacts/SOURCE.md` in the source
-repository. All other presentation is original to Friend Forge.
+MIX controls volume, mute and ambience. Sound and motion can be reduced; the menus work inside the SDK container on desktop and mobile.
+
+## RF costs, outcomes and authority
+
+All RF balances and rewards in this submission are **simulated**. One Iron Ore costs **1 RF** and one normal Forge consumes **one Iron Ore**. Only Iron is actionable; Gold and Diamond are odds previews, not additional SDK tiers. The configured Iron outcome table is:
+
+| Rarity | Chance | RF on redemption |
+|---|---:|---:|
+| Common | 50% | 0 RF |
+| Uncommon | 27% | 0.05 RF |
+| Rare | 14% | 0.10 RF |
+| Epic | 6% | 0.25 RF |
+| Legendary | 2.5% | 0.50 RF |
+| Mythic | 0.5% | 2 RF |
+
+The configured expected redemption value is **0.065 RF per Forge**, with a **2 RF** maximum. This is a collecting game, not a promise of profit. Zero-reward artifacts remain collectibles and cannot be redeemed. The exact twelve outcomes and weights live in [`game.json`](https://github.com/RomaMartynyuk/friend-forge/blob/sdk-integration/games/friend-forge/game.json); the [economy notes](https://github.com/RomaMartynyuk/friend-forge/blob/sdk-integration/ECONOMY.md) explain costs and limitations.
+
+The SDK owns `buy`, `play`, `settle`, `redeem` and pending-play recovery. The UI's rarity roll may be seeded by `playId`, but it cannot reroll or change an outcome. Reforge is **not atomic** and does **not** guarantee an upgrade. No live contracts, RF transfers or global contribution state are claimed.
+
+## Screenshots and short video
+
+The builder will add captures from the public demo here:
+
+> **01 — Island and playable Friend:** add a screenshot here.
+>
+> **02 — Central Forge rarity/artifact reveal:** add a screenshot or short GIF here.
+>
+> **03 — Collection detail and artwork:** add a screenshot here.
+
+An existing [mock-wallet UI walkthrough](https://github.com/RomaMartynyuk/friend-forge/blob/sdk-integration/media/walkthrough-mock.gif) is available in the source repo; it is labelled as a test-fixture capture, not a real-wallet recording.
+
+## Checks and known limitations
+
+FriendSDK `check` and `build` pass. Ten release tests cover odds, pending-play resume, zero-value redemption guards, Mining Dig, VFX and audio. Official mock-wallet browser checks passed at 960 and 360 px; focused desktop/mobile tests exercised island navigation, Ore Mine and Forge. The public HTTPS build serves the SDK wallet gate and main assets, and the builder reports the preview working. The [QA report](https://github.com/RomaMartynyuk/friend-forge/blob/sdk-integration/QA.md) records what was and was not independently checked. A formal TypeScript typecheck has not yet been recorded.
+
+Simulated progress lasts only for the SDK preview session. Gold/Diamond forging, global Furnace milestones and an atomic Reforge upgrade are not implemented. The island is visually dense at 360 px; phone touch comfort and the final audio mix need more human review. Official Rare Friends production publication would require separate review.
+
+**Credits:** Friend identity, canonical sprites and sound cues come from FriendSDK. The twelve artifact images derive from the project owner's approved artwork sheet; their provenance is documented in [`assets/artifacts/SOURCE.md`](https://github.com/RomaMartynyuk/friend-forge/blob/sdk-integration/games/friend-forge/assets/artifacts/SOURCE.md). Other presentation is original to Friend Forge.
