@@ -4,7 +4,9 @@
   "description": "**Friend Forge** is an interactive Rare Friends game prototype built for the Rare Friends Vibeathon.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "check:game": "friendsdk check ./games/friend-forge",
+    "build:game": "friendsdk build ./games/friend-forge"
   },
   "repository": {
     "type": "git",
@@ -13,7 +15,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/RomaMartynyuk/friend-forge/issues"
   },

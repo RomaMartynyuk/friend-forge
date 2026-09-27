@@ -1,4 +1,6 @@
 node_modules/
 **/.friendsdk/
-node_modules/
-**/.friendsdk/
+.DS_Store
+*.log
+coverage/
+media/frames/
