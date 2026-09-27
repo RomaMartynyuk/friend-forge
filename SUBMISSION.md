@@ -13,9 +13,10 @@ hardwired Generations NFT is required even in the simulated preview.
   and mobile mock-wallet browser QA: complete.
 - Screenshots and a short mock-wallet UI GIF: complete; see `media/`.
 - Public source repository: [RomaMartynyuk/friend-forge](https://github.com/RomaMartynyuk/friend-forge/tree/sdk-integration).
-- A dedicated `gh-pages` branch contains the generated SDK build. Its Pages
-  deployment success remains to be verified.
-- Public playable URL, real-wallet playtest and upstream PR: **pending**.
+- A dedicated `gh-pages` branch contains the generated SDK build. Pages built
+  commit `2360d02`; [public preview](https://romamartynyuk.github.io/friend-forge/)
+  and its main assets load successfully and show the FriendSDK wallet gate.
+- Eligible-wallet playthrough and upstream PR: **pending**.
 - Builder handle: `@RomaMartynyuk`; preferred contact details, if any, remain
   the builder's choice.
 
@@ -28,9 +29,9 @@ branch, with `.nojekyll`. Configure Pages source as **Deploy from a branch**,
 branch `gh-pages`, folder `/(root)`. Do not publish the source repository root:
 its legacy `index.html` is the old standalone prototype. Preserve the SDK
 ownership gate and sandbox CSP; do not substitute the test harness's mock wallet.
-Verify `https://romamartynyuk.github.io/friend-forge/` with an eligible Friend
-in a browser wallet, then place the verified URL in the draft submission README
-and PR description.
+Complete a playthrough at `https://romamartynyuk.github.io/friend-forge/` with
+an eligible Friend in a browser wallet. The public loader is verified, but
+the eligible-wallet path has not yet been observed in this release QA.
 
 The upstream PR should copy **only** `submissions/friend-forge/README.md` into
 the Vibeathon repository, replacing its clearly marked placeholders. The

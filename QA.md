@@ -12,6 +12,7 @@
 | Focused browser QA at 1280 px | PASS: island → Ore Mine → Forge; screenshots captured |
 | Focused browser QA at 360 px | PASS: Forge fits viewport, all three material cards fit, footer close button clickable |
 | Mock-wallet GIF capture | PASS; 26 real runtime frames assembled into `media/walkthrough-mock.gif` |
+| Public Pages smoke check | PASS; SDK runtime and assets return HTTP 200; wallet/Friend gate renders |
 
 The mobile run found and fixed an overflow of Forge material cards in the
 narrow SDK viewport. This was a layout-only release fix; odds and SDK calls
@@ -20,7 +21,7 @@ were not changed.
 ## Not yet verified
 
 - A real wallet holding an eligible hardwired Friend on Robinhood mainnet.
-- Public HTTPS hosting and an end-to-end playthrough of that deployment.
+- End-to-end playthrough of the public deployment with an eligible wallet.
 - Live-chain transactions or receipts. This release targets the simulated
   Vibeathon preview, not production publication.
 - Formal TypeScript typecheck and a human audio-mix review on speakers/phone.

@@ -18,10 +18,10 @@ npx friendsdk dev ./games/friend-forge --host 0.0.0.0 --port 4173
 ```
 
 The SDK local preview is simulated. Publish only the generated FriendSDK build
-from the dedicated `gh-pages` branch, never the legacy root `index.html`. The expected
-URL is `https://romamartynyuk.github.io/friend-forge/`, but it must be tested
-with an eligible Friend before being advertised as playable. The public
-preview and upstream Vibeathon PR are **not yet verified**; see
+from the dedicated `gh-pages` branch, never the legacy root `index.html`.
+The [public preview](https://romamartynyuk.github.io/friend-forge/) loads the
+FriendSDK wallet/Friend gate. An eligible-wallet playthrough and upstream
+Vibeathon PR are **not yet verified**; see
 [submission status](SUBMISSION.md). Do not present this local preview as a
 public deployment.
 

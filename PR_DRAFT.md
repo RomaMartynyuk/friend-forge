@@ -14,7 +14,7 @@ playable preview, QA evidence and limitations.
 
 - Builder/contact: @RomaMartynyuk (add a preferred contact if desired)
 - Public source repository: https://github.com/RomaMartynyuk/friend-forge/tree/sdk-integration
-- Public playable HTTPS preview: PENDING
+- Public preview: https://romamartynyuk.github.io/friend-forge/ (SDK wallet gate loads; eligible-wallet playthrough pending)
 - Screenshot or short walkthrough in source repo: [mock-wallet GIF](media/walkthrough-mock.gif)
 
 ## Validation
@@ -24,8 +24,8 @@ playable preview, QA evidence and limitations.
   zero-reward redemption guard.
 - Official SDK mock-wallet browser test passed at 960 and 360 px.
 - Focused desktop and mobile island/Ore Mine/Forge browser checks passed.
-- Real-wallet and deployed-site checks remain pending until the links above
-  are live. State their actual result before posting.
+- Public deployed loader and main assets return successfully; the FriendSDK
+  wallet gate renders. Eligible-wallet gameplay remains to be checked.
 
 ## Known limits
 

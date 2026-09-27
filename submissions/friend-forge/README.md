@@ -11,8 +11,9 @@ Collection.
 **Source:** [RomaMartynyuk/friend-forge (`sdk-integration`)](https://github.com/RomaMartynyuk/friend-forge/tree/sdk-integration) — code, assets,
 economy explanation, credits and setup instructions.
 
-**Playable preview:** PENDING — public HTTPS URL; do not submit this draft
-without a tested link.
+**Playable preview:** [Friend Forge on GitHub Pages](https://romamartynyuk.github.io/friend-forge/).
+The public FriendSDK loader and assets were checked; full gameplay requires an
+eligible browser wallet and has not yet been verified in this release QA.
 
 **Requirements:** A browser wallet on Robinhood mainnet holding a hardwired
 Generations NFT of generation 1 or higher. Preview RF, Ore and results are
