@@ -1,76 +1,75 @@
-# Friend Forge v0.3.2 — SDK Island Port
+# Friend Forge v1.0
 
-This checkpoint moves the real Friend Forge island into the FriendSDK game sandbox.
+An isometric Rare Friends game about mining, forging and collecting twelve
+artifacts with your Friend. The game uses FriendSDK v0.1.2 for its wallet,
+inventory, payments, plays, settlement and canonical Friend identity.
 
-## Included
+## Play
 
-- current Friend Forge island and bridge;
-- Ore Mine, Central Forge, Collection, Reforge and Community Furnace;
-- all current decorative trees and flowers;
-- WASD / arrows;
-- tap/click-to-walk;
-- building-label auto-navigation using the existing A* pathfinder;
-- building colliders;
-- dynamic building/Friend depth sorting;
-- tree/Friend depth sorting;
-- responsive building menus;
-- current demo Ore → Forge → Collection loop;
-- selected Friend ID displayed in the HUD;
-- FriendSDK `paused` support.
+1. Connect a browser wallet on Robinhood mainnet holding a hardwired
+   Generations NFT (generation 1 or higher), then select that Friend. The
+   local SDK preview uses simulated balances and results; it does not spend
+   real RF or require a transaction signature.
+2. Walk with WASD or arrow keys, tap the ground, or click a building label to
+   auto-walk there.
+3. Buy Iron Ore in **Ore Mine** (1 RF per Ore), then use **Central Forge**.
+4. Watch the cosmetic rarity roll and cinematic; the artifact itself comes
+   from FriendSDK settlement. Browse the twelve-slot **Collection**.
 
-## SDK bridge
+The Ore Mine also includes Mining Dig. Free practice awards nothing. A paid
+expedition buys exactly two Iron Ore for 2 RF through FriendSDK; digging score
+is cosmetic, and each Ore is forged through the ordinary SDK flow afterward.
+Community Furnace has three local mini-games with no RF or artifact rewards.
 
-`index.tsx` is intentionally thin:
+## Controls and accessibility
 
-1. receives `friendId`, `client`, and `paused`;
-2. performs the required initial `client.read()`;
-3. verifies the snapshot belongs to the selected Friend;
-4. mounts the existing Friend Forge renderer;
-5. passes `friendId` and a live `paused` accessor into the game engine.
+| Action | Desktop | Touch |
+|---|---|---|
+| Move Friend | WASD / arrows | Tap ground |
+| Visit building | Click label | Tap label |
+| Mine adjacent tile | Click or WASD / arrows | Tap tile |
+| Sound | ENABLE SOUND, then MIX | Same controls |
 
-When FriendSDK pauses the game, movement, pointer input, auto-navigation, and menu interactions are blocked.
+Menus adapt to desktop and mobile, scroll within the viewport, and reopen at
+their headings. Sound starts only after a user gesture. MIX offers shared
+volume, mute and optional quiet ambience for the current session. Reduced-motion settings disable
+nonessential visual animation.
 
-## Scope of v0.3.2
+## What is authoritative
 
-Still intentionally **not integrated**:
+FriendSDK owns RF, Ore, inventory, purchases, play IDs, settlement and
+redemption. Iron is the only executable Forge material in v1.0. Gold and
+Diamond are labelled odds previews, not purchasable/forgeable tiers. The
+roulette, Mine score, VFX, audio, Dice/Lots/Cases and rarity presentation
+never choose or upgrade an outcome.
 
-- canonical Rare Friend NFT sprite rendering;
-- SDK `buy()` for Ore;
-- SDK `play()` / `settle()` for Forge randomness;
-- SDK inventory as the Collection source of truth;
-- live/on-chain economy.
+Reforge is an SDK-only **salvage loop**, not a guaranteed rarity upgrade:
+sell one redeemable duplicate while keeping one, buy one Iron Ore, then run
+the normal Forge. These are separate SDK actions, not an atomic contract
+operation. Common artifacts with 0 RF redemption value remain collectibles
+and cannot enter that loop. See [economy notes](../../ECONOMY.md).
 
-The current demo economy is in-memory only. Browser `localStorage` was removed because the FriendSDK sandbox does not expose durable browser storage.
+## Run locally
 
-## Run
+From the repository root, with Node.js 22+ and FriendSDK v0.1.2:
 
-From the repository root:
-
-```bash
+```sh
 npx friendsdk check ./games/friend-forge
 npx friendsdk build ./games/friend-forge
 npx friendsdk dev ./games/friend-forge --host 0.0.0.0 --port 4173
 ```
 
-In Codespaces, keep port 4173 Public.
+The SDK preview is useful for local QA but is **not** a public deployment.
+Refresh the browser after editing source. If port 4173 is in use, stop the old
+preview process before starting another.
 
-## Next checkpoints
+## Release status
 
-- v0.3.3 — canonical selected Rare Friend sprite
-- v0.3.4 — SDK Ore purchase + play/settle Forge + SDK inventory
-- v0.3.5 — deploy `.friendsdk/` to GitHub Pages
+This v1.0 package freezes gameplay at v0.9 and performs documentation and QA.
+No new FriendSDK API or contract action is introduced. See
+[architecture](../../ARCHITECTURE.md), [QA report](../../QA.md), and
+[submission checklist](../../SUBMISSION.md). Public demo and upstream
+Vibeathon PR are tracked there until their real URLs are supplied and verified.
 
-## v0.3.2.2 — IIFE-safe inline assets
-
-The FriendSDK game bundle is currently compiled as IIFE. The previous
-`new URL(..., import.meta.url)` asset approach is therefore not compatible
-with this build target.
-
-This version embeds the scene PNG files directly in `GameMarkup.ts` as
-`data:image/png;base64,...` URLs.
-
-This removes runtime asset-path resolution from the checkpoint and makes the
-same build usable in FriendSDK dev preview, generated `.friendsdk/`,
-Codespaces, and GitHub Pages.
-
-The original PNG files remain under `assets/` as source files.
+Artwork provenance for the twelve artifacts is in
+[`assets/artifacts/SOURCE.md`](assets/artifacts/SOURCE.md).
