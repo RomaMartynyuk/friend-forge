@@ -2,7 +2,7 @@
 
 **Builder / contact:** [@RomaMartynyuk](https://github.com/RomaMartynyuk).
 
-**Category:** Character Spotlight (proposed).
+**Category:** Character Spotlight.
 
 **One sentence:** Explore an isometric island with your own Rare Friend, buy
 Iron Ore with simulated RF, forge SDK-settled artifacts and fill a twelve-item
@@ -43,8 +43,8 @@ outcome weights and caveats.
 
 **Checks:** FriendSDK check/build; 10 unit tests; official mock-wallet
 browser checks at 960/360 px; focused island/Ore Mine/Forge checks at desktop
-and mobile. A real-wallet and public-host playthrough remain outstanding
-until the preview URL is verified.
+and mobile. The public host loads the SDK wallet gate and main assets; an
+eligible-wallet end-to-end playthrough remains outstanding.
 
 **Known limitations:** Simulated progress lasts for the SDK preview session.
 No live RF transfer, Gold/Diamond Forge tier, global Furnace state, or
