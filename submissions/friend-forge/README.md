@@ -6,7 +6,7 @@ Explore a small isometric island as your own Rare Friend. Buy Iron Ore, reveal S
 - **Category:** Character Spotlight
 - **Source:** [Friend Forge on GitHub — `sdk-integration`](https://github.com/RomaMartynyuk/friend-forge/tree/sdk-integration)
 - **Playable preview:** [Play Friend Forge](https://romamartynyuk.github.io/friend-forge/)
-- **Stack:** FriendSDK v0.1.2, TypeScript/React, HTML/CSS/canvas
+- **Stack:** FriendSDK v0.1.3, TypeScript/React, HTML/CSS/canvas
 
 ## What did you build?
 

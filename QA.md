@@ -1,5 +1,18 @@
 # v1.0 QA report — 2026-09-27
 
+## FriendSDK v0.1.3 hotfix verification — 2026-09-29
+
+The dependency was updated to the official v0.1.3 release archive after
+verifying its published SHA-256 checksum. This release fixes owned Friend
+discovery on Robinhood mainnet; Friend Forge's economy and outcome table were
+not changed. The 10 release tests, `friendsdk check`, and `friendsdk build`
+pass with v0.1.3. `friendsdk check` still reports an expected reward of
+0.065 RF and a maximum prize of 2 RF.
+
+The automated browser check was not rerun for this hotfix: this checkout does
+not include Playwright. A real eligible-wallet discovery check on the public
+preview remains necessary after deploying the rebuilt SDK output.
+
 ## Automated checks passed
 
 | Check | Result |

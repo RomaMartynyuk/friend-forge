@@ -1,7 +1,7 @@
 # Friend Forge v1.0
 
 An isometric Rare Friends game about mining, forging and collecting twelve
-artifacts with your Friend. The game uses FriendSDK v0.1.2 for its wallet,
+artifacts with your Friend. The game uses FriendSDK v0.1.3 for its wallet,
 inventory, payments, plays, settlement and canonical Friend identity.
 
 ## Play
@@ -51,7 +51,7 @@ and cannot enter that loop. See [economy notes](../../ECONOMY.md).
 
 ## Run locally
 
-From the repository root, with Node.js 22+ and FriendSDK v0.1.2:
+From the repository root, with Node.js 22+ and FriendSDK v0.1.3:
 
 ```sh
 npx friendsdk check ./games/friend-forge

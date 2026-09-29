@@ -1,4 +1,4 @@
-// Run with FriendSDK v0.1.2 and Playwright installed in the repository.
+// Run with FriendSDK v0.1.3 and Playwright installed in the repository.
 // The SDK test helper uses a mock wallet and simulated RPC; never a real wallet.
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";

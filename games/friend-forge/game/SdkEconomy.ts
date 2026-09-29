@@ -249,7 +249,7 @@ export function createFriendForgeEconomy(
       throw new Error("You need Ore before forging.");
     }
 
-    // Exact FriendSDK v0.1.2 contract:
+    // FriendSDK v0.1.3 retains this play contract:
     // client.play() returns readonly GamePlay[] and each play uses `id`.
     const [play] = await client.play(1n);
 

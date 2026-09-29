@@ -1,6 +1,6 @@
 # Draft upstream PR — do not open with placeholders
 
-Title: `Submission: Friend Forge (Character Spotlight)`
+Title: `Submission: Friend Forge (Token Activity)`
 
 ## Summary
 
@@ -19,7 +19,7 @@ playable preview, QA evidence and limitations.
 
 ## Validation
 
-- FriendSDK v0.1.2 `check` and `build` passed.
+- FriendSDK v0.1.3 `check` and `build` passed.
 - Ten local tests passed, including odds, pending play resume and the
   zero-reward redemption guard.
 - Official SDK mock-wallet browser test passed at 960 and 360 px.
